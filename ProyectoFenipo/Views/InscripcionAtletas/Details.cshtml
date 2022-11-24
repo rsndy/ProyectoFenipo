@@ -1,0 +1,58 @@
+﻿@model ProyectoFenipo.Models.InscripcionAtletas
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>InscripcionAtletas</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Atleta.NombreAtleta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Atleta.NombreAtleta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InscripcionEquipo.DelegadoEquipo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InscripcionEquipo.DelegadoEquipo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Competencia.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Competencia.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CategoriaEdad.NombreCategoriaEdad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CategoriaEdad.NombreCategoriaEdad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CategoriaPeso.NombreCategoriaPeso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CategoriaPeso.NombreCategoriaPeso)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

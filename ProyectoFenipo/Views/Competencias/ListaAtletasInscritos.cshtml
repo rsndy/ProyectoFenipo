@@ -1,0 +1,82 @@
+﻿@model ProyectoFenipo.Models.Competencia
+
+@{
+
+    ViewBag.Title = "Lista De Atletas";
+    ProyectoFenipo.Models.ProyectoFenipoContainer container = new ProyectoFenipo.Models.ProyectoFenipoContainer();
+    var InscripcionesAtletas = container.InscripcionAtletasSet.Where(x => x.CompetenciaId == Model.Id);
+    var intentosSentadilla = container.Intentos.Where(x => x.Movimiento == "Sentadilla");
+    var intentosPress = container.Intentos.Where(x => x.Movimiento == "Press Banca");
+    var intentosMuerto = container.Intentos.Where(x => x.Movimiento == "Peso Muerto");
+    //var categoriasOrdenadas;
+    //var atletasOrdenados;
+
+}
+
+<h2>Clasificacion de Atletas</h2>
+
+<table class="table">
+    @foreach (var cat in container.CategoriaPesos)
+    {
+        <tr>
+            <th>
+                @Html.DisplayName(cat.NombreCategoriaPeso);
+            </th>
+        </tr>
+
+        <tr>
+            <th>
+                @Html.DisplayName("Atleta")
+            </th>
+            <th>
+                @Html.DisplayName("Mejor Sentadilla")
+            </th>
+            <th>
+                @Html.DisplayName("Mejor Press Banca")
+            </th>
+            <th>
+                @Html.DisplayName("Mejor Deadlift")
+            </th>
+            <th>
+                @Html.DisplayName("Total")
+            </th>
+            <th>
+                @Html.DisplayName("GlPoints")
+            </th>
+        </tr>
+        foreach (var atleta in InscripcionesAtletas)
+        {
+            <tr>
+                <tb>
+                    @Html.Display(atleta.Atleta.NombreAtleta);
+                </tb>
+            </tr>
+            <tr>
+                <tb>
+                    @Html.Display(intentosSentadilla.Where(x => x.InscripcionAtletasId == atleta.Id).Max(x => x.KilosMovimiento).ToString());
+                </tb>
+            </tr>
+            <tr>
+                <tb>
+                    @Html.Display(intentosPress.Where(x => x.InscripcionAtletasId == atleta.Id).Max(x => x.KilosMovimiento).ToString());
+                </tb>
+            </tr>
+            <tr>
+                <tb>
+                    @Html.Display(intentosMuerto.Where(x => x.InscripcionAtletasId == atleta.Id).Max(x => x.KilosMovimiento).ToString());
+                </tb>
+            </tr>
+            <tr>
+                <tb>
+                    @Html.Display((intentosMuerto.Where(x => x.InscripcionAtletasId == atleta.Id).Max(x => x.KilosMovimiento) 
+                   + intentosMuerto.Where(x => x.InscripcionAtletasId == atleta.Id).Max(x => x.KilosMovimiento) 
+                   + intentosSentadilla.Where(x => x.InscripcionAtletasId == atleta.Id).Max(x => x.KilosMovimiento).ToString()));
+                </tb>
+            </tr>
+
+
+        }
+    }
+
+
+</table>
