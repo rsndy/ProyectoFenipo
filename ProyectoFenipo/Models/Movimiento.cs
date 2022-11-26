@@ -12,19 +12,18 @@ namespace ProyectoFenipo.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CategoriaPeso
+    public partial class Movimiento
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CategoriaPeso()
+        public Movimiento()
         {
-            this.InscripcionAtletas = new HashSet<InscripcionAtletas>();
+            this.Intento = new HashSet<Intento>();
         }
     
         public int Id { get; set; }
-        public string NombreCategoriaPeso { get; set; }
-        public string Genero { get; set; }
+        public string Nombre { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<InscripcionAtletas> InscripcionAtletas { get; set; }
+        public virtual ICollection<Intento> Intento { get; set; }
     }
 }

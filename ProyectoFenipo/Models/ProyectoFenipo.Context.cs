@@ -33,5 +33,8 @@ namespace ProyectoFenipo.Models
         public virtual DbSet<CategoriaPeso> CategoriaPesos { get; set; }
         public virtual DbSet<CategoriaEdad> CategoriaEdades { get; set; }
         public virtual DbSet<Intento> Intentos { get; set; }
+        public virtual DbSet<NumeroIntento> NumeroIntentos { get; set; }
+        public virtual DbSet<Movimiento> Movimientos { get; set; }
+        public virtual DbSet<StatusMovimiento> StatusMovimientoSet { get; set; }
     }
 }

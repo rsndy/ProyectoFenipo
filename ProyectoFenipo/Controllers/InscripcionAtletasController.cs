@@ -55,11 +55,24 @@ namespace ProyectoFenipo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,AtletaId,InscripcionEquipoId,CompetenciaId,CategoriaEdadId,CategoriaPesoId")] InscripcionAtletas inscripcionAtletas)
         {
-            
+            IntentoesController metodo = new IntentoesController();
+            Intento intento = new Intento();
             if (ModelState.IsValid)
             {
                 db.InscripcionAtletasSet.Add(inscripcionAtletas);
                 db.SaveChanges();
+                for (int i = 0 ; i < 3; i++)
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        intento.InscripcionAtletasId = inscripcionAtletas.Id;
+                        intento.KilosMovimiento = 0;
+                        intento.MovimientoId = i + 1;
+                        intento.StatusMovimientoId = 4;
+                        intento.NumeroIntentoId = j + 1;
+                        metodo.CreateInt(intento);
+                    }
+                }
                 return RedirectToAction("Index");
             }
 
@@ -68,6 +81,7 @@ namespace ProyectoFenipo.Controllers
             ViewBag.CompetenciaId = new SelectList(db.Competencias, "Id", "Nombre", inscripcionAtletas.CompetenciaId);
             ViewBag.CategoriaEdadId = new SelectList(db.CategoriaEdades, "Id", "NombreCategoriaEdad", inscripcionAtletas.CategoriaEdadId);
             ViewBag.CategoriaPesoId = new SelectList(db.CategoriaPesos, "Id", "NombreCategoriaPeso", inscripcionAtletas.CategoriaPesoId);
+            
             return View(inscripcionAtletas);
         }
 
@@ -75,8 +89,7 @@ namespace ProyectoFenipo.Controllers
         public ActionResult Edit(int? id)
         {
 
-            var equipoInscrito = db.InscripcionEquipos.GroupJoin(db.Equipos, equi => equi.EquipoId, Ins => Ins.Id,
-                (equi, Ins) => new { equi, Ins }).ToList();
+           
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -87,7 +100,7 @@ namespace ProyectoFenipo.Controllers
                 return HttpNotFound();
             }
             ViewBag.AtletaId = new SelectList(db.Atletas, "Id", "NombreAtleta", inscripcionAtletas.AtletaId);
-            ViewBag.InscripcionEquipoId = new SelectList(db.InscripcionEquipos, "Id", "equi.Equipo.NombreEquipo", inscripcionAtletas.InscripcionEquipoId);
+            ViewBag.InscripcionEquipoId = new SelectList(db.InscripcionEquipos, "Id", "Equipo.NombreEquipo", inscripcionAtletas.InscripcionEquipoId);
             ViewBag.CompetenciaId = new SelectList(db.Competencias, "Id", "Nombre", inscripcionAtletas.CompetenciaId);
             ViewBag.CategoriaEdadId = new SelectList(db.CategoriaEdades, "Id", "NombreCategoriaEdad", inscripcionAtletas.CategoriaEdadId);
             ViewBag.CategoriaPesoId = new SelectList(db.CategoriaPesos, "Id", "NombreCategoriaPeso", inscripcionAtletas.CategoriaPesoId);
@@ -108,7 +121,7 @@ namespace ProyectoFenipo.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.AtletaId = new SelectList(db.Atletas, "Id", "NombreAtleta", inscripcionAtletas.AtletaId);
-            ViewBag.InscripcionEquipoId = new SelectList(db.InscripcionEquipos, "Id", "DelegadoEquipo", inscripcionAtletas.InscripcionEquipoId);
+            ViewBag.InscripcionEquipoId = new SelectList(db.InscripcionEquipos, "Id", "Equipo.NombreEquipo", inscripcionAtletas.InscripcionEquipoId);
             ViewBag.CompetenciaId = new SelectList(db.Competencias, "Id", "Nombre", inscripcionAtletas.CompetenciaId);
             ViewBag.CategoriaEdadId = new SelectList(db.CategoriaEdades, "Id", "NombreCategoriaEdad", inscripcionAtletas.CategoriaEdadId);
             ViewBag.CategoriaPesoId = new SelectList(db.CategoriaPesos, "Id", "NombreCategoriaPeso", inscripcionAtletas.CategoriaPesoId);

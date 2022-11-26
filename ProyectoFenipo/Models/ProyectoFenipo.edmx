@@ -14,6 +14,9 @@
     <EntitySet Name="CategoriaPesos" EntityType="ProyectoFenipo.Store.CategoriaPesos" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CategoriaEdades" EntityType="ProyectoFenipo.Store.CategoriaEdades" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Intentos" EntityType="ProyectoFenipo.Store.Intentos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="NumeroIntentos" EntityType="ProyectoFenipo.Store.NumeroIntentos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Movimientos" EntityType="ProyectoFenipo.Store.Movimientos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="StatusMovimientoSet" EntityType="ProyectoFenipo.Store.StatusMovimientoSet" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="AtletaInscripcionAtletas" Association="ProyectoFenipo.Store.AtletaInscripcionAtletas">
       <End Role="Atleta" EntitySet="Atletas" />
       <End Role="InscripcionAtletas" EntitySet="InscripcionAtletasSet" />
@@ -45,6 +48,18 @@
     <AssociationSet Name="InscripcionAtletasCategoriaPeso" Association="ProyectoFenipo.Store.InscripcionAtletasCategoriaPeso">
       <End Role="InscripcionAtletas" EntitySet="InscripcionAtletasSet" />
       <End Role="CategoriaPeso" EntitySet="CategoriaPesos" />
+    </AssociationSet>
+    <AssociationSet Name="IntentoMovimiento" Association="ProyectoFenipo.Store.IntentoMovimiento">
+      <End Role="Intento" EntitySet="Intentos" />
+      <End Role="Movimiento" EntitySet="Movimientos" />
+    </AssociationSet>
+    <AssociationSet Name="NumeroIntentoIntento" Association="ProyectoFenipo.Store.NumeroIntentoIntento">
+      <End Role="NumeroIntento" EntitySet="NumeroIntentos" />
+      <End Role="Intento" EntitySet="Intentos" />
+    </AssociationSet>
+    <AssociationSet Name="IntentoStatusMovimiento" Association="ProyectoFenipo.Store.IntentoStatusMovimiento">
+      <End Role="Intento" EntitySet="Intentos" />
+      <End Role="StatusMovimiento" EntitySet="StatusMovimientoSet" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Atletas">
@@ -99,6 +114,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="NombreCategoriaPeso" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Genero" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="CategoriaEdades">
     <Key>
@@ -113,10 +129,31 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="InscripcionAtletasId" Type="int" Nullable="false" />
-    <Property Name="Movimiento" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="NumeroIntento" Type="nvarchar(max)" Nullable="false" />
     <Property Name="KilosMovimiento" Type="decimal" Nullable="false" />
-    <Property Name="Estatus" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MovimientoId" Type="int" Nullable="false" />
+    <Property Name="NumeroIntentoId" Type="int" Nullable="false" />
+    <Property Name="StatusMovimientoId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NumeroIntentos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Numero" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Movimientos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StatusMovimientoSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <Association Name="AtletaInscripcionAtletas">
     <End Role="Atleta" Type="ProyectoFenipo.Store.Atletas" Multiplicity="1" />
@@ -214,6 +251,42 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="IntentoMovimiento">
+    <End Role="Intento" Type="ProyectoFenipo.Store.Intentos" Multiplicity="*" />
+    <End Role="Movimiento" Type="ProyectoFenipo.Store.Movimientos" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Movimiento">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Intento">
+        <PropertyRef Name="MovimientoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="NumeroIntentoIntento">
+    <End Role="NumeroIntento" Type="ProyectoFenipo.Store.NumeroIntentos" Multiplicity="1" />
+    <End Role="Intento" Type="ProyectoFenipo.Store.Intentos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NumeroIntento">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Intento">
+        <PropertyRef Name="NumeroIntentoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="IntentoStatusMovimiento">
+    <End Role="Intento" Type="ProyectoFenipo.Store.Intentos" Multiplicity="*" />
+    <End Role="StatusMovimiento" Type="ProyectoFenipo.Store.StatusMovimientoSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="StatusMovimiento">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Intento">
+        <PropertyRef Name="StatusMovimientoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -258,6 +331,21 @@
           <AssociationSet Name="InscripcionAtletasCategoriaPeso" Association="ProyectoFenipo.InscripcionAtletasCategoriaPeso">
             <End Role="InscripcionAtletas" EntitySet="InscripcionAtletasSet" />
             <End Role="CategoriaPeso" EntitySet="CategoriaPesos" />
+          </AssociationSet>
+          <EntitySet Name="NumeroIntentos" EntityType="ProyectoFenipo.NumeroIntento" />
+          <EntitySet Name="Movimientos" EntityType="ProyectoFenipo.Movimiento" />
+          <EntitySet Name="StatusMovimientoSet" EntityType="ProyectoFenipo.StatusMovimiento" />
+          <AssociationSet Name="IntentoMovimiento" Association="ProyectoFenipo.IntentoMovimiento">
+            <End Role="Intento" EntitySet="Intentos" />
+            <End Role="Movimiento" EntitySet="Movimientos" />
+          </AssociationSet>
+          <AssociationSet Name="NumeroIntentoIntento" Association="ProyectoFenipo.NumeroIntentoIntento">
+            <End Role="NumeroIntento" EntitySet="NumeroIntentos" />
+            <End Role="Intento" EntitySet="Intentos" />
+          </AssociationSet>
+          <AssociationSet Name="IntentoStatusMovimiento" Association="ProyectoFenipo.IntentoStatusMovimiento">
+            <End Role="Intento" EntitySet="Intentos" />
+            <End Role="StatusMovimiento" EntitySet="StatusMovimientoSet" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Atleta">
@@ -326,6 +414,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NombreCategoriaPeso" Type="String" Nullable="false" />
           <NavigationProperty Name="InscripcionAtletas" Relationship="ProyectoFenipo.InscripcionAtletasCategoriaPeso" FromRole="CategoriaPeso" ToRole="InscripcionAtletas" />
+          <Property Name="Genero" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="CategoriaEdad">
           <Key>
@@ -341,11 +430,14 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="InscripcionAtletasId" Type="Int32" Nullable="false" />
-          <Property Name="Movimiento" Type="String" Nullable="false" />
-          <Property Name="NumeroIntento" Type="String" Nullable="false" />
           <Property Name="KilosMovimiento" Type="Decimal" Nullable="false" />
-          <Property Name="Estatus" Type="String" Nullable="false" />
           <NavigationProperty Name="InscripcionAtletas" Relationship="ProyectoFenipo.InscripcionAtletasIntento" FromRole="Intento" ToRole="InscripcionAtletas" />
+          <NavigationProperty Name="Movimiento1" Relationship="ProyectoFenipo.IntentoMovimiento" FromRole="Intento" ToRole="Movimiento" />
+          <Property Name="MovimientoId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="NumeroIntento1" Relationship="ProyectoFenipo.NumeroIntentoIntento" FromRole="Intento" ToRole="NumeroIntento" />
+          <Property Name="NumeroIntentoId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="StatusMovimiento" Relationship="ProyectoFenipo.IntentoStatusMovimiento" FromRole="Intento" ToRole="StatusMovimiento" />
+          <Property Name="StatusMovimientoId" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="AtletaInscripcionAtletas">
           <End Type="ProyectoFenipo.Atleta" Role="Atleta" Multiplicity="1" />
@@ -443,6 +535,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="NumeroIntento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Numero" Type="String" Nullable="false" />
+          <NavigationProperty Name="Intento" Relationship="ProyectoFenipo.NumeroIntentoIntento" FromRole="NumeroIntento" ToRole="Intento" />
+        </EntityType>
+        <EntityType Name="Movimiento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" />
+          <NavigationProperty Name="Intento" Relationship="ProyectoFenipo.IntentoMovimiento" FromRole="Movimiento" ToRole="Intento" />
+        </EntityType>
+        <EntityType Name="StatusMovimiento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" Nullable="false" />
+          <NavigationProperty Name="Intento" Relationship="ProyectoFenipo.IntentoStatusMovimiento" FromRole="StatusMovimiento" ToRole="Intento" />
+        </EntityType>
+        <Association Name="IntentoMovimiento">
+          <End Type="ProyectoFenipo.Intento" Role="Intento" Multiplicity="*" />
+          <End Type="ProyectoFenipo.Movimiento" Role="Movimiento" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Movimiento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Intento">
+              <PropertyRef Name="MovimientoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="NumeroIntentoIntento">
+          <End Type="ProyectoFenipo.NumeroIntento" Role="NumeroIntento" Multiplicity="1" />
+          <End Type="ProyectoFenipo.Intento" Role="Intento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NumeroIntento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Intento">
+              <PropertyRef Name="NumeroIntentoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IntentoStatusMovimiento">
+          <End Type="ProyectoFenipo.Intento" Role="Intento" Multiplicity="*" />
+          <End Type="ProyectoFenipo.StatusMovimiento" Role="StatusMovimiento" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="StatusMovimiento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Intento">
+              <PropertyRef Name="StatusMovimientoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -505,6 +657,7 @@
         <MappingFragment StoreEntitySet="CategoriaPesos">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="NombreCategoriaPeso" ColumnName="NombreCategoriaPeso" />
+          <ScalarProperty Name="Genero" ColumnName="Genero" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -521,10 +674,34 @@
         <MappingFragment StoreEntitySet="Intentos">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="InscripcionAtletasId" ColumnName="InscripcionAtletasId" />
-          <ScalarProperty Name="Movimiento" ColumnName="Movimiento" />
-          <ScalarProperty Name="NumeroIntento" ColumnName="NumeroIntento" />
           <ScalarProperty Name="KilosMovimiento" ColumnName="KilosMovimiento" />
-          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="MovimientoId" ColumnName="MovimientoId" />
+          <ScalarProperty Name="NumeroIntentoId" ColumnName="NumeroIntentoId" />
+          <ScalarProperty Name="StatusMovimientoId" ColumnName="StatusMovimientoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NumeroIntentos">
+      <EntityTypeMapping TypeName="IsTypeOf(ProyectoFenipo.NumeroIntento)">
+        <MappingFragment StoreEntitySet="NumeroIntentos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Numero" ColumnName="Numero" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Movimientos">
+      <EntityTypeMapping TypeName="IsTypeOf(ProyectoFenipo.Movimiento)">
+        <MappingFragment StoreEntitySet="Movimientos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StatusMovimientoSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ProyectoFenipo.StatusMovimiento)">
+        <MappingFragment StoreEntitySet="StatusMovimientoSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

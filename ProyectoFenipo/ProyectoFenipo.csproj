@@ -181,6 +181,8 @@
     <Compile Include="Controllers\InscripcionEquipoesController.cs" />
     <Compile Include="Controllers\IntentoesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MovimientoesController.cs" />
+    <Compile Include="Controllers\NumeroIntentoesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -211,6 +213,12 @@
       <DependentUpon>ProyectoFenipo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Movimiento.cs">
+      <DependentUpon>ProyectoFenipo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NumeroIntento.cs">
+      <DependentUpon>ProyectoFenipo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ProyectoFenipo.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -226,6 +234,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ProyectoFenipo.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\StatusMovimiento.cs">
+      <DependentUpon>ProyectoFenipo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -233,6 +244,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="Views\StatusMovimientoesController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -322,11 +334,6 @@
     <Content Include="Views\CategoriaEdads\Details.cshtml" />
     <Content Include="Views\CategoriaEdads\Edit.cshtml" />
     <Content Include="Views\CategoriaEdads\Index.cshtml" />
-    <Content Include="Views\CategoriaPesoes\Create.cshtml" />
-    <Content Include="Views\CategoriaPesoes\Delete.cshtml" />
-    <Content Include="Views\CategoriaPesoes\Details.cshtml" />
-    <Content Include="Views\CategoriaPesoes\Edit.cshtml" />
-    <Content Include="Views\CategoriaPesoes\Index.cshtml" />
     <Content Include="Views\Competencias\Create.cshtml" />
     <Content Include="Views\Competencias\Delete.cshtml" />
     <Content Include="Views\Competencias\Details.cshtml" />
@@ -348,11 +355,32 @@
     <Content Include="Views\InscripcionEquipoes\Edit.cshtml" />
     <Content Include="Views\InscripcionEquipoes\Index.cshtml" />
     <Content Include="Views\Competencias\ListaAtletasInscritos.cshtml" />
+    <Content Include="Views\Movimientoes\Create.cshtml" />
+    <Content Include="Views\Movimientoes\Delete.cshtml" />
+    <Content Include="Views\Movimientoes\Details.cshtml" />
+    <Content Include="Views\Movimientoes\Edit.cshtml" />
+    <Content Include="Views\Movimientoes\Index.cshtml" />
+    <Content Include="Views\NumeroIntentoes\Create.cshtml" />
+    <Content Include="Views\NumeroIntentoes\Delete.cshtml" />
+    <Content Include="Views\NumeroIntentoes\Details.cshtml" />
+    <Content Include="Views\NumeroIntentoes\Edit.cshtml" />
+    <Content Include="Views\NumeroIntentoes\Index.cshtml" />
+    <Content Include="Views\StatusMovimientoes\Create.cshtml" />
+    <Content Include="Views\StatusMovimientoes\Delete.cshtml" />
+    <Content Include="Views\StatusMovimientoes\Details.cshtml" />
+    <Content Include="Views\StatusMovimientoes\Edit.cshtml" />
+    <Content Include="Views\StatusMovimientoes\Index.cshtml" />
     <Content Include="Views\Intentoes\Create.cshtml" />
     <Content Include="Views\Intentoes\Delete.cshtml" />
     <Content Include="Views\Intentoes\Details.cshtml" />
     <Content Include="Views\Intentoes\Edit.cshtml" />
     <Content Include="Views\Intentoes\Index.cshtml" />
+    <Content Include="Views\CategoriaPesoes\Create.cshtml" />
+    <Content Include="Views\CategoriaPesoes\Delete.cshtml" />
+    <Content Include="Views\CategoriaPesoes\Details.cshtml" />
+    <Content Include="Views\CategoriaPesoes\Edit.cshtml" />
+    <Content Include="Views\CategoriaPesoes\Index.cshtml" />
+    <Content Include="Views\Competencias\ListaEquipos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

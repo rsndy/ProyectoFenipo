@@ -57,6 +57,7 @@
         <MappingFragment StoreEntitySet="CategoriaPesos">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="NombreCategoriaPeso" ColumnName="NombreCategoriaPeso" />
+          <ScalarProperty Name="Genero" ColumnName="Genero" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -73,10 +74,34 @@
         <MappingFragment StoreEntitySet="Intentos">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="InscripcionAtletasId" ColumnName="InscripcionAtletasId" />
-          <ScalarProperty Name="Movimiento" ColumnName="Movimiento" />
-          <ScalarProperty Name="NumeroIntento" ColumnName="NumeroIntento" />
           <ScalarProperty Name="KilosMovimiento" ColumnName="KilosMovimiento" />
-          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="MovimientoId" ColumnName="MovimientoId" />
+          <ScalarProperty Name="NumeroIntentoId" ColumnName="NumeroIntentoId" />
+          <ScalarProperty Name="StatusMovimientoId" ColumnName="StatusMovimientoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NumeroIntentos">
+      <EntityTypeMapping TypeName="IsTypeOf(ProyectoFenipo.NumeroIntento)">
+        <MappingFragment StoreEntitySet="NumeroIntentos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Numero" ColumnName="Numero" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Movimientos">
+      <EntityTypeMapping TypeName="IsTypeOf(ProyectoFenipo.Movimiento)">
+        <MappingFragment StoreEntitySet="Movimientos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StatusMovimientoSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ProyectoFenipo.StatusMovimiento)">
+        <MappingFragment StoreEntitySet="StatusMovimientoSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -1,0 +1,43 @@
+﻿@using ProyectoFenipo.Models
+
+@model ProyectoFenipo.Models.Competencia
+
+@{
+    ProyectoFenipoContainer db = new ProyectoFenipoContainer();
+    ViewBag.Title = "Lista De Equipos";
+    List<InscripcionEquipo> Equipos = db.InscripcionEquipos.Where(x => x.CompetenciaId == Model.Id).ToList();
+}
+
+<h2>Lista de equipos Participantes - @Model.Nombre</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Nombre del equipo")
+        </th>
+        <th>
+            @Html.DisplayName("Delegado de Equipo")
+        </th>
+        <th>
+            @Html.DisplayName("Nacionalidad Equipo")
+        </th>
+    </tr>
+
+    @foreach(var equipo in Equipos)
+     {
+        <tr>
+            <td>
+                @Html.DisplayName(equipo.Equipo.NombreEquipo)
+            </td>
+            <td>
+                @Html.DisplayName(equipo.DelegadoEquipo)
+            </td>
+            <td>
+                @Html.DisplayName(equipo.Equipo.NacionalidadEquipo)
+            </td>
+        </tr>
+
+
+     }
+
+</table>

@@ -16,11 +16,14 @@ namespace ProyectoFenipo.Models
     {
         public int Id { get; set; }
         public int InscripcionAtletasId { get; set; }
-        public string Movimiento { get; set; }
-        public string NumeroIntento { get; set; }
         public decimal KilosMovimiento { get; set; }
-        public string Estatus { get; set; }
+        public int MovimientoId { get; set; }
+        public int NumeroIntentoId { get; set; }
+        public int StatusMovimientoId { get; set; }
     
         public virtual InscripcionAtletas InscripcionAtletas { get; set; }
+        public virtual Movimiento Movimiento1 { get; set; }
+        public virtual NumeroIntento NumeroIntento1 { get; set; }
+        public virtual StatusMovimiento StatusMovimiento { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace ProyectoFenipo.Controllers
         // GET: Intentoes
         public ActionResult Index()
         {
-            var intentos = db.Intentos.Include(i => i.InscripcionAtletas);
+            var intentos = db.Intentos.Include(i => i.InscripcionAtletas).Include(i => i.Movimiento1).Include(i => i.NumeroIntento1).Include(i => i.StatusMovimiento);
             return View(intentos.ToList());
         }
 
@@ -40,6 +40,9 @@ namespace ProyectoFenipo.Controllers
         public ActionResult Create()
         {
             ViewBag.InscripcionAtletasId = new SelectList(db.InscripcionAtletasSet, "Id", "Id");
+            ViewBag.MovimientoId = new SelectList(db.Movimientos, "Id", "Nombre");
+            ViewBag.NumeroIntentoId = new SelectList(db.NumeroIntentos, "Id", "Numero");
+            ViewBag.StatusMovimientoId = new SelectList(db.StatusMovimientoSet, "Id", "Status");
             return View();
         }
 
@@ -48,7 +51,7 @@ namespace ProyectoFenipo.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,InscripcionAtletasId,Movimiento,NumeroIntento,KilosMovimiento,Estatus")] Intento intento)
+        public ActionResult Create([Bind(Include = "Id,InscripcionAtletasId,KilosMovimiento,MovimientoId,NumeroIntentoId,StatusMovimientoId")] Intento intento)
         {
             if (ModelState.IsValid)
             {
@@ -58,7 +61,16 @@ namespace ProyectoFenipo.Controllers
             }
 
             ViewBag.InscripcionAtletasId = new SelectList(db.InscripcionAtletasSet, "Id", "Id", intento.InscripcionAtletasId);
+            ViewBag.MovimientoId = new SelectList(db.Movimientos, "Id", "Nombre", intento.MovimientoId);
+            ViewBag.NumeroIntentoId = new SelectList(db.NumeroIntentos, "Id", "Numero", intento.NumeroIntentoId);
+            ViewBag.StatusMovimientoId = new SelectList(db.StatusMovimientoSet, "Id", "Status", intento.StatusMovimientoId);
             return View(intento);
+        }
+        public void CreateInt(Intento intento)
+        {
+                db.Intentos.Add(intento);
+                db.SaveChanges();
+                          
         }
 
         // GET: Intentoes/Edit/5
@@ -74,6 +86,9 @@ namespace ProyectoFenipo.Controllers
                 return HttpNotFound();
             }
             ViewBag.InscripcionAtletasId = new SelectList(db.InscripcionAtletasSet, "Id", "Id", intento.InscripcionAtletasId);
+            ViewBag.MovimientoId = new SelectList(db.Movimientos, "Id", "Nombre", intento.MovimientoId);
+            ViewBag.NumeroIntentoId = new SelectList(db.NumeroIntentos, "Id", "Numero", intento.NumeroIntentoId);
+            ViewBag.StatusMovimientoId = new SelectList(db.StatusMovimientoSet, "Id", "Status", intento.StatusMovimientoId);
             return View(intento);
         }
 
@@ -82,7 +97,7 @@ namespace ProyectoFenipo.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,InscripcionAtletasId,Movimiento,NumeroIntento,KilosMovimiento,Estatus")] Intento intento)
+        public ActionResult Edit([Bind(Include = "Id,InscripcionAtletasId,KilosMovimiento,MovimientoId,NumeroIntentoId,StatusMovimientoId")] Intento intento)
         {
             if (ModelState.IsValid)
             {
@@ -91,6 +106,9 @@ namespace ProyectoFenipo.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.InscripcionAtletasId = new SelectList(db.InscripcionAtletasSet, "Id", "Id", intento.InscripcionAtletasId);
+            ViewBag.MovimientoId = new SelectList(db.Movimientos, "Id", "Nombre", intento.MovimientoId);
+            ViewBag.NumeroIntentoId = new SelectList(db.NumeroIntentos, "Id", "Numero", intento.NumeroIntentoId);
+            ViewBag.StatusMovimientoId = new SelectList(db.StatusMovimientoSet, "Id", "Status", intento.StatusMovimientoId);
             return View(intento);
         }
 

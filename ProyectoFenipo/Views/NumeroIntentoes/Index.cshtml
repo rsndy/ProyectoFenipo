@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProyectoFenipo.Models.CategoriaPeso>
+﻿@model IEnumerable<ProyectoFenipo.Models.NumeroIntento>
 
 @{
     ViewBag.Title = "Index";
@@ -12,10 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.NombreCategoriaPeso)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Genero)
+            @Html.DisplayNameFor(model => model.Numero)
         </th>
         <th></th>
     </tr>
@@ -23,10 +20,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.NombreCategoriaPeso)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Genero)
+            @Html.DisplayFor(modelItem => item.Numero)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

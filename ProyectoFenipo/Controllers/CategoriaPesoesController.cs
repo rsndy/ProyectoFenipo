@@ -14,13 +14,14 @@ namespace ProyectoFenipo.Controllers
     {
         private ProyectoFenipoContainer db = new ProyectoFenipoContainer();
 
-        // GET: CategoriaPesoes
+        // GET: CategoriaPesoes1
         public ActionResult Index()
         {
+           
             return View(db.CategoriaPesos.ToList());
         }
 
-        // GET: CategoriaPesoes/Details/5
+        // GET: CategoriaPesoes1/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -35,18 +36,18 @@ namespace ProyectoFenipo.Controllers
             return View(categoriaPeso);
         }
 
-        // GET: CategoriaPesoes/Create
+        // GET: CategoriaPesoes1/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: CategoriaPesoes/Create
+        // POST: CategoriaPesoes1/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,NombreCategoriaPeso")] CategoriaPeso categoriaPeso)
+        public ActionResult Create([Bind(Include = "Id,NombreCategoriaPeso,Genero")] CategoriaPeso categoriaPeso)
         {
             if (ModelState.IsValid)
             {
@@ -58,7 +59,7 @@ namespace ProyectoFenipo.Controllers
             return View(categoriaPeso);
         }
 
-        // GET: CategoriaPesoes/Edit/5
+        // GET: CategoriaPesoes1/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -73,12 +74,12 @@ namespace ProyectoFenipo.Controllers
             return View(categoriaPeso);
         }
 
-        // POST: CategoriaPesoes/Edit/5
+        // POST: CategoriaPesoes1/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,NombreCategoriaPeso")] CategoriaPeso categoriaPeso)
+        public ActionResult Edit([Bind(Include = "Id,NombreCategoriaPeso,Genero")] CategoriaPeso categoriaPeso)
         {
             if (ModelState.IsValid)
             {
@@ -89,7 +90,7 @@ namespace ProyectoFenipo.Controllers
             return View(categoriaPeso);
         }
 
-        // GET: CategoriaPesoes/Delete/5
+        // GET: CategoriaPesoes1/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -104,7 +105,7 @@ namespace ProyectoFenipo.Controllers
             return View(categoriaPeso);
         }
 
-        // POST: CategoriaPesoes/Delete/5
+        // POST: CategoriaPesoes1/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

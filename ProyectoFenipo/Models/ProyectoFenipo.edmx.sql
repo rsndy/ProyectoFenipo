@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/23/2022 20:39:01
+-- Date Created: 11/24/2022 18:06:20
 -- Generated from EDMX file: C:\Users\Uriel Sandi G\Desktop\ProyectoFenipo\ProyectoFenipo\Models\ProyectoFenipo.edmx
 -- --------------------------------------------------
 
@@ -124,7 +124,8 @@ GO
 -- Creating table 'CategoriaPesos'
 CREATE TABLE [dbo].[CategoriaPesos] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [NombreCategoriaPeso] nvarchar(max)  NOT NULL
+    [NombreCategoriaPeso] nvarchar(max)  NOT NULL,
+    [Genero] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -139,10 +140,31 @@ GO
 CREATE TABLE [dbo].[Intentos] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [InscripcionAtletasId] int  NOT NULL,
-    [Movimiento] nvarchar(max)  NOT NULL,
-    [NumeroIntento] nvarchar(max)  NOT NULL,
     [KilosMovimiento] decimal(18,0)  NOT NULL,
-    [Estatus] nvarchar(max)  NOT NULL
+    [MovimientoId] int  NOT NULL,
+    [NumeroIntentoId] int  NOT NULL,
+    [StatusMovimientoId] int  NOT NULL
+);
+GO
+
+-- Creating table 'NumeroIntentos'
+CREATE TABLE [dbo].[NumeroIntentos] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Numero] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'Movimientos'
+CREATE TABLE [dbo].[Movimientos] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Nombre] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'StatusMovimientoSet'
+CREATE TABLE [dbo].[StatusMovimientoSet] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Status] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -195,6 +217,24 @@ GO
 -- Creating primary key on [Id] in table 'Intentos'
 ALTER TABLE [dbo].[Intentos]
 ADD CONSTRAINT [PK_Intentos]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'NumeroIntentos'
+ALTER TABLE [dbo].[NumeroIntentos]
+ADD CONSTRAINT [PK_NumeroIntentos]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Movimientos'
+ALTER TABLE [dbo].[Movimientos]
+ADD CONSTRAINT [PK_Movimientos]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'StatusMovimientoSet'
+ALTER TABLE [dbo].[StatusMovimientoSet]
+ADD CONSTRAINT [PK_StatusMovimientoSet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -320,6 +360,51 @@ GO
 CREATE INDEX [IX_FK_InscripcionAtletasCategoriaPeso]
 ON [dbo].[InscripcionAtletasSet]
     ([CategoriaPesoId]);
+GO
+
+-- Creating foreign key on [MovimientoId] in table 'Intentos'
+ALTER TABLE [dbo].[Intentos]
+ADD CONSTRAINT [FK_IntentoMovimiento]
+    FOREIGN KEY ([MovimientoId])
+    REFERENCES [dbo].[Movimientos]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_IntentoMovimiento'
+CREATE INDEX [IX_FK_IntentoMovimiento]
+ON [dbo].[Intentos]
+    ([MovimientoId]);
+GO
+
+-- Creating foreign key on [NumeroIntentoId] in table 'Intentos'
+ALTER TABLE [dbo].[Intentos]
+ADD CONSTRAINT [FK_NumeroIntentoIntento]
+    FOREIGN KEY ([NumeroIntentoId])
+    REFERENCES [dbo].[NumeroIntentos]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_NumeroIntentoIntento'
+CREATE INDEX [IX_FK_NumeroIntentoIntento]
+ON [dbo].[Intentos]
+    ([NumeroIntentoId]);
+GO
+
+-- Creating foreign key on [StatusMovimientoId] in table 'Intentos'
+ALTER TABLE [dbo].[Intentos]
+ADD CONSTRAINT [FK_IntentoStatusMovimiento]
+    FOREIGN KEY ([StatusMovimientoId])
+    REFERENCES [dbo].[StatusMovimientoSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_IntentoStatusMovimiento'
+CREATE INDEX [IX_FK_IntentoStatusMovimiento]
+ON [dbo].[Intentos]
+    ([StatusMovimientoId]);
 GO
 
 -- --------------------------------------------------

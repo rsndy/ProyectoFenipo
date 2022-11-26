@@ -10,135 +10,107 @@ using ProyectoFenipo.Models;
 
 namespace ProyectoFenipo.Controllers
 {
-    public class CompetenciasController : Controller
+    public class NumeroIntentoesController : Controller
     {
         private ProyectoFenipoContainer db = new ProyectoFenipoContainer();
 
-        // GET: Competencias
+        // GET: NumeroIntentoes
         public ActionResult Index()
         {
-            return View(db.Competencias.ToList());
-        }
-        public ActionResult ListaAtletasInscritos(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest) ;
-            }
-            Competencia competencia = db.Competencias.Find(id);
-             
-            if (competencia == null)
-            {
-                return HttpNotFound();
-            }
-            return View(competencia) ; 
+            return View(db.NumeroIntentos.ToList());
         }
 
-        public ActionResult ListaEquipos(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Competencia competencia = db.Competencias.Find(id);
-
-            if (competencia == null)
-            {
-                return HttpNotFound();
-            }
-            return View(competencia);
-        }
-        // GET: Competencias/Details/5
+        // GET: NumeroIntentoes/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Competencia competencia = db.Competencias.Find(id);
-            if (competencia == null)
+            NumeroIntento numeroIntento = db.NumeroIntentos.Find(id);
+            if (numeroIntento == null)
             {
                 return HttpNotFound();
             }
-            return View(competencia);
+            return View(numeroIntento);
         }
 
-        // GET: Competencias/Create
+        // GET: NumeroIntentoes/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Competencias/Create
+        // POST: NumeroIntentoes/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nombre,Lugar,Fecha")] Competencia competencia)
+        public ActionResult Create([Bind(Include = "Id,Numero")] NumeroIntento numeroIntento)
         {
             if (ModelState.IsValid)
             {
-                db.Competencias.Add(competencia);
+                db.NumeroIntentos.Add(numeroIntento);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(competencia);
+            return View(numeroIntento);
         }
 
-        // GET: Competencias/Edit/5
+        // GET: NumeroIntentoes/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Competencia competencia = db.Competencias.Find(id);
-            if (competencia == null)
+            NumeroIntento numeroIntento = db.NumeroIntentos.Find(id);
+            if (numeroIntento == null)
             {
                 return HttpNotFound();
             }
-            return View(competencia);
+            return View(numeroIntento);
         }
 
-        // POST: Competencias/Edit/5
+        // POST: NumeroIntentoes/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nombre,Lugar,Fecha")] Competencia competencia)
+        public ActionResult Edit([Bind(Include = "Id,Numero")] NumeroIntento numeroIntento)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(competencia).State = EntityState.Modified;
+                db.Entry(numeroIntento).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(competencia);
+            return View(numeroIntento);
         }
 
-        // GET: Competencias/Delete/5
+        // GET: NumeroIntentoes/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Competencia competencia = db.Competencias.Find(id);
-            if (competencia == null)
+            NumeroIntento numeroIntento = db.NumeroIntentos.Find(id);
+            if (numeroIntento == null)
             {
                 return HttpNotFound();
             }
-            return View(competencia);
+            return View(numeroIntento);
         }
 
-        // POST: Competencias/Delete/5
+        // POST: NumeroIntentoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Competencia competencia = db.Competencias.Find(id);
-            db.Competencias.Remove(competencia);
+            NumeroIntento numeroIntento = db.NumeroIntentos.Find(id);
+            db.NumeroIntentos.Remove(numeroIntento);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

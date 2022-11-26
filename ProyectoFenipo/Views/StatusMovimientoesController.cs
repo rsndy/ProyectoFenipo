@@ -8,137 +8,109 @@ using System.Web;
 using System.Web.Mvc;
 using ProyectoFenipo.Models;
 
-namespace ProyectoFenipo.Controllers
+namespace ProyectoFenipo.Views
 {
-    public class CompetenciasController : Controller
+    public class StatusMovimientoesController : Controller
     {
         private ProyectoFenipoContainer db = new ProyectoFenipoContainer();
 
-        // GET: Competencias
+        // GET: StatusMovimientoes
         public ActionResult Index()
         {
-            return View(db.Competencias.ToList());
-        }
-        public ActionResult ListaAtletasInscritos(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest) ;
-            }
-            Competencia competencia = db.Competencias.Find(id);
-             
-            if (competencia == null)
-            {
-                return HttpNotFound();
-            }
-            return View(competencia) ; 
+            return View(db.StatusMovimientoSet.ToList());
         }
 
-        public ActionResult ListaEquipos(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Competencia competencia = db.Competencias.Find(id);
-
-            if (competencia == null)
-            {
-                return HttpNotFound();
-            }
-            return View(competencia);
-        }
-        // GET: Competencias/Details/5
+        // GET: StatusMovimientoes/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Competencia competencia = db.Competencias.Find(id);
-            if (competencia == null)
+            StatusMovimiento statusMovimiento = db.StatusMovimientoSet.Find(id);
+            if (statusMovimiento == null)
             {
                 return HttpNotFound();
             }
-            return View(competencia);
+            return View(statusMovimiento);
         }
 
-        // GET: Competencias/Create
+        // GET: StatusMovimientoes/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Competencias/Create
+        // POST: StatusMovimientoes/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nombre,Lugar,Fecha")] Competencia competencia)
+        public ActionResult Create([Bind(Include = "Id,Status")] StatusMovimiento statusMovimiento)
         {
             if (ModelState.IsValid)
             {
-                db.Competencias.Add(competencia);
+                db.StatusMovimientoSet.Add(statusMovimiento);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(competencia);
+            return View(statusMovimiento);
         }
 
-        // GET: Competencias/Edit/5
+        // GET: StatusMovimientoes/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Competencia competencia = db.Competencias.Find(id);
-            if (competencia == null)
+            StatusMovimiento statusMovimiento = db.StatusMovimientoSet.Find(id);
+            if (statusMovimiento == null)
             {
                 return HttpNotFound();
             }
-            return View(competencia);
+            return View(statusMovimiento);
         }
 
-        // POST: Competencias/Edit/5
+        // POST: StatusMovimientoes/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nombre,Lugar,Fecha")] Competencia competencia)
+        public ActionResult Edit([Bind(Include = "Id,Status")] StatusMovimiento statusMovimiento)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(competencia).State = EntityState.Modified;
+                db.Entry(statusMovimiento).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(competencia);
+            return View(statusMovimiento);
         }
 
-        // GET: Competencias/Delete/5
+        // GET: StatusMovimientoes/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Competencia competencia = db.Competencias.Find(id);
-            if (competencia == null)
+            StatusMovimiento statusMovimiento = db.StatusMovimientoSet.Find(id);
+            if (statusMovimiento == null)
             {
                 return HttpNotFound();
             }
-            return View(competencia);
+            return View(statusMovimiento);
         }
 
-        // POST: Competencias/Delete/5
+        // POST: StatusMovimientoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Competencia competencia = db.Competencias.Find(id);
-            db.Competencias.Remove(competencia);
+            StatusMovimiento statusMovimiento = db.StatusMovimientoSet.Find(id);
+            db.StatusMovimientoSet.Remove(statusMovimiento);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
