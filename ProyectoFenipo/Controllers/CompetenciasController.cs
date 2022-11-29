@@ -19,6 +19,11 @@ namespace ProyectoFenipo.Controllers
         {
             return View(db.Competencias.ToList());
         }
+        //Vista de usuario publico 
+        public ActionResult CompetenciasPublico()
+        {
+            return View(db.Competencias.ToList());
+        }
         public ActionResult ListaAtletasInscritos(int? id)
         {
             if (id == null)
@@ -33,6 +38,8 @@ namespace ProyectoFenipo.Controllers
             }
             return View(competencia) ; 
         }
+
+        
 
         public ActionResult ListaEquipos(int? id)
         {

@@ -1,0 +1,3 @@
+-Mostrar Lista de competencias
+-Mostrar Clasficiacion de la competencia
+-Mostrar Equipos Inscritos
