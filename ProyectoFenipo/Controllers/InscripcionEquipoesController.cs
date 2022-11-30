@@ -39,6 +39,7 @@ namespace ProyectoFenipo.Controllers
         // GET: InscripcionEquipoes/Create
         public ActionResult Create()
         {
+            ViewBag.showSuccessAlert = false;
             ViewBag.EquipoId = new SelectList(db.Equipos, "Id", "NombreEquipo");
             ViewBag.CompetenciaId = new SelectList(db.Competencias, "Id", "Nombre");
             return View();
@@ -53,15 +54,24 @@ namespace ProyectoFenipo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,EquipoId,DelegadoEquipo,CompetenciaId")] InscripcionEquipo inscripcionEquipo)
         {
+            foreach(var team in db.InscripcionEquipos.Where(x=>x.CompetenciaId == inscripcionEquipo.CompetenciaId))
+            {
+                if(team.EquipoId == inscripcionEquipo.EquipoId)
+                {
+                    return Content("<script>alert('El equipo ya esta inscrito') </script>"); 
+                }
+                
+            }
             if (ModelState.IsValid)
             {
                 db.InscripcionEquipos.Add(inscripcionEquipo);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ListaEquipos/" + inscripcionEquipo.CompetenciaId, "Competencias");
             }
 
+
             ViewBag.EquipoId = new SelectList(db.Equipos, "Id", "NombreEquipo", inscripcionEquipo.EquipoId);
-            ViewBag.CompetenciaId = new SelectList(db.Competencias, "Id", "Nombre", inscripcionEquipo.CompetenciaId);
+            //ViewBag.CompetenciaId = new SelectList(db.Competencias, "Id", "Nombre", inscripcionEquipo.CompetenciaId);
             return View(inscripcionEquipo);
         }
 
@@ -95,7 +105,7 @@ namespace ProyectoFenipo.Controllers
             {
                 db.Entry(inscripcionEquipo).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ListaEquipos/" + inscripcionEquipo.CompetenciaId, "Competencias");
             }
             ViewBag.EquipoId = new SelectList(db.Equipos, "Id", "NombreEquipo", inscripcionEquipo.EquipoId);
             ViewBag.CompetenciaId = new SelectList(db.Competencias, "Id", "Nombre", inscripcionEquipo.CompetenciaId);
@@ -125,7 +135,7 @@ namespace ProyectoFenipo.Controllers
             InscripcionEquipo inscripcionEquipo = db.InscripcionEquipos.Find(id);
             db.InscripcionEquipos.Remove(inscripcionEquipo);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("ListaEquipos/" + inscripcionEquipo.CompetenciaId, "Competencias");
         }
 
         protected override void Dispose(bool disposing)

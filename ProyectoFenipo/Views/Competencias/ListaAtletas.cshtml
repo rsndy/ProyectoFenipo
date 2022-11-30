@@ -1,0 +1,93 @@
+﻿
+@using ProyectoFenipo.Models
+@model ProyectoFenipo.Models.Competencia
+
+@{
+    ProyectoFenipoContainer db = new ProyectoFenipoContainer();
+    ViewBag.Title = "Lista De Atletas";
+
+
+
+}
+
+
+<h2>Lista de Atletas Participantes - @Model.Nombre</h2>
+
+@Html.ActionLink("+", "Create", "InscripcionAtletas?id=", new { id = Model.Id }, new { @class = "btn btn-primary" })
+
+
+<h2>Lista de Atletas Masculinos</h2>
+
+<table class="table">
+    @if (db.InscripcionAtletasSet.Where(x => x.CompetenciaId == Model.Id).Count() != 0)
+    {
+        <tr>
+            <th>
+                @Html.DisplayName("Levantador")
+            </th>
+            <th>
+                @Html.DisplayName("Peso Corporal")
+            </th>
+            <th>
+                @Html.DisplayName("Equipo")
+            </th>
+
+        </tr>
+        foreach (var atleta in db.InscripcionAtletasSet.Where(x => x.Atleta.Sexo == "Hombre"))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayName(atleta.Atleta.NombreAtleta.ToString())
+                </td>
+                <td>
+                    @Html.DisplayName((atleta.PesoCorporal).ToString())
+                </td>
+                <td>
+                    @Html.DisplayName((atleta.InscripcionEquipo.Equipo.NombreEquipo).ToString())
+                </td>
+
+            </tr>
+        }
+    }
+
+
+
+</table>
+
+<h2>Lista de Atletas Femeninas</h2>
+
+<table class="table">
+    @if (db.InscripcionAtletasSet.Where(x => x.CompetenciaId == Model.Id).Count() != 0)
+    {
+        <tr>
+            <th>
+                @Html.DisplayName("Levantador")
+            </th>
+            <th>
+                @Html.DisplayName("Peso Corporal")
+            </th>
+            <th>
+                @Html.DisplayName("Equipo")
+            </th>
+
+        </tr>
+        foreach (var atleta in db.InscripcionAtletasSet.Where(x => x.Atleta.Sexo == "Mujer"))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayName(atleta.Atleta.NombreAtleta.ToString())
+                </td>
+                <td>
+                    @Html.DisplayName((atleta.PesoCorporal).ToString())
+                </td>
+                <td>
+                    @Html.DisplayName((atleta.InscripcionEquipo.Equipo.NombreEquipo).ToString())
+                </td>
+
+            </tr>
+        }
+    }
+
+
+
+</table>

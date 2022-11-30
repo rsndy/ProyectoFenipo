@@ -37,8 +37,9 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index") |
-    @Html.ActionLink("Clasificacion de Atletas", "ListaAtletasInscritos", new { id = Model.Id } , new { @type = "button", @class = "btn btn-primary" }) |
-    @Html.ActionLink("Lista de Equipos Inscritos", "ListaEquipos", new { id = Model.Id } , new { @type = "button", @class = "btn btn-primary" }) | 
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-secondary btn-sm" }) |
+    @Html.ActionLink("Regresar A Lista", "Index" , null , new { @class = "btn btn-dark btn-sm" }) |
+    @Html.ActionLink("Lista De atletas", "ListaAtletas", new { id = Model.Id }, new { @type = "button", @class = "btn btn-primary btn-sm" }) |
+    @Html.ActionLink("Lista de Equipos Inscritos", "ListaEquipos", new { id = Model.Id }, new { @type = "button", @class = "btn btn-primary btn-sm" }) |
+    @Html.ActionLink("Clasificacion De Atletas", "ClasificacionAtletas", new { id = Model.Id }, new { @type = "button", @class = "btn btn-primary btn-sm" }) |
 </p>

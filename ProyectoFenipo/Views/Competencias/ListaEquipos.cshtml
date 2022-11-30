@@ -10,6 +10,9 @@
 
 <h2>Lista de equipos Participantes - @Model.Nombre</h2>
 
+@*@Html.ActionLink("+", "Create?id=Model.Id", "InscripcionEquipoes", null, new { @class = "btn btn-primary" })*@
+<a class="btn btn-primary" href="~/InscripcionEquipoes/Create?id=@Model.Id">+</a>
+
 <table class="table">
     <tr>
         <th>
@@ -23,8 +26,8 @@
         </th>
     </tr>
 
-    @foreach(var equipo in Equipos)
-     {
+    @foreach (var equipo in Equipos)
+    {
         <tr>
             <td>
                 @Html.DisplayName(equipo.Equipo.NombreEquipo)
@@ -35,9 +38,17 @@
             <td>
                 @Html.DisplayName(equipo.Equipo.NacionalidadEquipo)
             </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", "InscripcionEquipoes" ,  new { id = equipo.Id }, new { @class = "btn btn-secondary btn-sm" }) |
+
+                @Html.ActionLink("Detalles", "Details", "InscripcionEquipoes", new { id = equipo.Id }, new { @class = "btn btn-info btn-sm" }) |
+
+                @Html.ActionLink("Borrar", "Delete", "InscripcionEquipoes", new { id = equipo.Id }, new { @class = "btn btn-danger btn-sm" }) |
+            </td>
+
         </tr>
 
 
-     }
+    }
 
 </table>

@@ -341,7 +341,7 @@
     <Content Include="Views\InscripcionEquipoes\Details.cshtml" />
     <Content Include="Views\InscripcionEquipoes\Edit.cshtml" />
     <Content Include="Views\InscripcionEquipoes\Index.cshtml" />
-    <Content Include="Views\Competencias\ListaAtletasInscritos.cshtml" />
+    <Content Include="Views\Competencias\ClasificacionAtletas.cshtml" />
     <Content Include="Views\Movimientoes\Create.cshtml" />
     <Content Include="Views\Movimientoes\Delete.cshtml" />
     <Content Include="Views\Movimientoes\Details.cshtml" />
@@ -363,7 +363,6 @@
     <Content Include="Views\Intentoes\Edit.cshtml" />
     <Content Include="Views\Intentoes\Index.cshtml" />
     <Content Include="Views\Competencias\ListaEquipos.cshtml" />
-    <Content Include="Views\Competencias\CompetenciasPublico.cshtml" />
     <Content Include="Views\Records\RecordsSentadilla.cshtml" />
     <Content Include="Views\Records\RecordsPressBanca.cshtml" />
     <Content Include="Views\Records\RecordsPesoMuerto.cshtml" />
@@ -377,7 +376,7 @@
     <Content Include="Views\InscripcionAtletas\Details.cshtml" />
     <Content Include="Views\InscripcionAtletas\Edit.cshtml" />
     <Content Include="Views\InscripcionAtletas\Index.cshtml" />
-    <Content Include="Views\Competencias\CompetenciaAdministracion.cshtml" />
+    <Content Include="Views\Competencias\ListaAtletas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

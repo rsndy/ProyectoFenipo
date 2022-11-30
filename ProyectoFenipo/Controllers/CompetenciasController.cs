@@ -20,16 +20,22 @@ namespace ProyectoFenipo.Controllers
             return View(db.Competencias.ToList());
         }
         //Vista de usuario publico 
-        public ActionResult CompetenciasPublico()
-        {
-            return View(db.Competencias.ToList());
-        }
 
-        public ActionResult CompetenciaAdministracion()
+        public ActionResult ListaAtletas(int? id)
         {
-            return View(db.Competencias.ToList());
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Competencia competencia = db.Competencias.Find(id);
+
+            if (competencia == null)
+            {
+                return HttpNotFound();
+            }
+            return View(competencia);
         }
-        public ActionResult ListaAtletasInscritos(int? id)
+        public ActionResult ClasificacionAtletas(int? id)
         {
             if (id == null)
             {
