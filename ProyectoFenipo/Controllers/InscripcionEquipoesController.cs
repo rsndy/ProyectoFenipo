@@ -44,6 +44,8 @@ namespace ProyectoFenipo.Controllers
             return View();
         }
 
+    
+
         // POST: InscripcionEquipoes/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -62,6 +64,8 @@ namespace ProyectoFenipo.Controllers
             ViewBag.CompetenciaId = new SelectList(db.Competencias, "Id", "Nombre", inscripcionEquipo.CompetenciaId);
             return View(inscripcionEquipo);
         }
+
+   
 
         // GET: InscripcionEquipoes/Edit/5
         public ActionResult Edit(int? id)

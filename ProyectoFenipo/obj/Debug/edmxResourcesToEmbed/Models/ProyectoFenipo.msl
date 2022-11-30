@@ -49,6 +49,9 @@
           <ScalarProperty Name="CompetenciaId" ColumnName="CompetenciaId" />
           <ScalarProperty Name="CategoriaEdadId" ColumnName="CategoriaEdadId" />
           <ScalarProperty Name="CategoriaPesoId" ColumnName="CategoriaPesoId" />
+          <ScalarProperty Name="PesoCorporal" ColumnName="PesoCorporal" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="GLPoint" ColumnName="GLPoint" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

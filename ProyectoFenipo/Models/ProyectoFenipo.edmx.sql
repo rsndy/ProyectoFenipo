@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/24/2022 18:06:20
+-- Date Created: 11/29/2022 18:14:02
 -- Generated from EDMX file: C:\Users\Uriel Sandi G\Desktop\ProyectoFenipo\ProyectoFenipo\Models\ProyectoFenipo.edmx
 -- --------------------------------------------------
 
@@ -41,6 +41,15 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_InscripcionAtletasCategoriaPeso]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[InscripcionAtletasSet] DROP CONSTRAINT [FK_InscripcionAtletasCategoriaPeso];
 GO
+IF OBJECT_ID(N'[dbo].[FK_IntentoMovimiento]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Intentos] DROP CONSTRAINT [FK_IntentoMovimiento];
+GO
+IF OBJECT_ID(N'[dbo].[FK_NumeroIntentoIntento]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Intentos] DROP CONSTRAINT [FK_NumeroIntentoIntento];
+GO
+IF OBJECT_ID(N'[dbo].[FK_IntentoStatusMovimiento]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Intentos] DROP CONSTRAINT [FK_IntentoStatusMovimiento];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -69,6 +78,15 @@ IF OBJECT_ID(N'[dbo].[CategoriaEdades]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Intentos]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Intentos];
+GO
+IF OBJECT_ID(N'[dbo].[NumeroIntentos]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[NumeroIntentos];
+GO
+IF OBJECT_ID(N'[dbo].[Movimientos]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Movimientos];
+GO
+IF OBJECT_ID(N'[dbo].[StatusMovimientoSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[StatusMovimientoSet];
 GO
 
 -- --------------------------------------------------
@@ -117,14 +135,17 @@ CREATE TABLE [dbo].[InscripcionAtletasSet] (
     [InscripcionEquipoId] int  NOT NULL,
     [CompetenciaId] int  NOT NULL,
     [CategoriaEdadId] int  NOT NULL,
-    [CategoriaPesoId] int  NOT NULL
+    [CategoriaPesoId] int  NOT NULL,
+    [PesoCorporal] float  NOT NULL,
+    [Total] float  NOT NULL,
+    [GLPoint] float  NOT NULL
 );
 GO
 
 -- Creating table 'CategoriaPesos'
 CREATE TABLE [dbo].[CategoriaPesos] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [NombreCategoriaPeso] nvarchar(max)  NOT NULL,
+    [NombreCategoriaPeso] int  NOT NULL,
     [Genero] nvarchar(max)  NOT NULL
 );
 GO

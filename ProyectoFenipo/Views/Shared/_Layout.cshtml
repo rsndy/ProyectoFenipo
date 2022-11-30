@@ -36,10 +36,8 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#!">Settings</a></li>
-                    <li><a class="dropdown-item" href="#!">Activity Log</a></li>
-                    <li><hr class="dropdown-divider" /></li>
-                    <li><a class="dropdown-item" href="#!">Logout</a></li>
+                    <li><a class="dropdown-item" href="~/Account/Login">Iniciar Sesion</a></li>
+                    <li><a class="dropdown-item" href="~/Account/Login">Cerrar Sesion</a></li>
                 </ul>
             </li>
         </ul>
@@ -49,32 +47,12 @@
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        <div class="sb-sidenav-menu-heading">Administracion</div>
-                        <a class="nav-link" href="~/Atletas/Index">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-person-walking"></i></div>
-                            Afiliacion de atletas
-                        </a>
-                        <a class="nav-link" href="~/Equipoes/Index">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-people-line"></i></div>
-                            Afiliacion de Equipos
-                        </a>
-                        <a class="nav-link" href="~/Competencias/Index">
+                       @Html.Partial("_LoginPartial");
+                        <div class="sb-sidenav-menu-heading">Administracion de Competencia</div>
+                        <a class="nav-link" href="~/Competencias/CompetenciaAdministracion">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-medal"></i></div>
-                            Programacion de Competencias
+                            Competencias
                         </a>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseParametros" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Parametros de Competicion
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseParametros" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="~/Intentoes/Index">Intento</a>
-                                <a class="nav-link" href="~/Movimientoes/Index">Movimientos</a>
-                                <a class="nav-link" href="~/CategoriaPesoes/Index">Categorias de Peso</a>
-                                <a class="nav-link" href="~/CategoriaEdads/Index">Categorias de Edad</a>
-                            </nav>
-                        </div>
                         <div class="sb-sidenav-menu-heading">Publico</div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseRecords" aria-expanded="false" aria-controls="collapseRecords">
                             <div class="sb-nav-link-icon"><i class="fa-sharp fa-solid fa-ranking-star"></i></div>
@@ -83,9 +61,9 @@
                         </a>
                         <div class="collapse" id="collapseRecords" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="~/Intentoes/Index">Sentadilla</a>
-                                <a class="nav-link" href="~/Movimientoes/Index">Press Banca</a>
-                                <a class="nav-link" href="~/CategoriaPesoes/Index">Peso Muerto</a>
+                                <a class="nav-link" href="~/Records/RecordsSentadilla">Sentadilla</a>
+                                <a class="nav-link" href="~/Records/RecordsPressBanca">Press Banca</a>
+                                <a class="nav-link" href="~/Records/RecordsPesoMuerto">Peso Muerto</a>
                                 <a class="nav-link" href="~/CategoriaEdads/Index">Total</a>
                             </nav>
                         </div>

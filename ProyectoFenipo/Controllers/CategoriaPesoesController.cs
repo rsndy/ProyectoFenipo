@@ -14,14 +14,13 @@ namespace ProyectoFenipo.Controllers
     {
         private ProyectoFenipoContainer db = new ProyectoFenipoContainer();
 
-        // GET: CategoriaPesoes1
+        // GET: CategoriaPesoes
         public ActionResult Index()
         {
-           
             return View(db.CategoriaPesos.ToList());
         }
 
-        // GET: CategoriaPesoes1/Details/5
+        // GET: CategoriaPesoes/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,13 +35,13 @@ namespace ProyectoFenipo.Controllers
             return View(categoriaPeso);
         }
 
-        // GET: CategoriaPesoes1/Create
+        // GET: CategoriaPesoes/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: CategoriaPesoes1/Create
+        // POST: CategoriaPesoes/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -59,7 +58,7 @@ namespace ProyectoFenipo.Controllers
             return View(categoriaPeso);
         }
 
-        // GET: CategoriaPesoes1/Edit/5
+        // GET: CategoriaPesoes/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -74,7 +73,7 @@ namespace ProyectoFenipo.Controllers
             return View(categoriaPeso);
         }
 
-        // POST: CategoriaPesoes1/Edit/5
+        // POST: CategoriaPesoes/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -90,7 +89,7 @@ namespace ProyectoFenipo.Controllers
             return View(categoriaPeso);
         }
 
-        // GET: CategoriaPesoes1/Delete/5
+        // GET: CategoriaPesoes/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -105,7 +104,7 @@ namespace ProyectoFenipo.Controllers
             return View(categoriaPeso);
         }
 
-        // POST: CategoriaPesoes1/Delete/5
+        // POST: CategoriaPesoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

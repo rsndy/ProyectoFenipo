@@ -177,12 +177,14 @@
     <Compile Include="Controllers\CompetenciasController.cs" />
     <Compile Include="Controllers\EquipoesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Informacion.cs" />
     <Compile Include="Controllers\InscripcionAtletasController.cs" />
     <Compile Include="Controllers\InscripcionEquipoesController.cs" />
     <Compile Include="Controllers\IntentoesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MovimientoesController.cs" />
     <Compile Include="Controllers\NumeroIntentoesController.cs" />
+    <Compile Include="Controllers\RecordsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -244,7 +246,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
-    <Compile Include="Views\StatusMovimientoesController.cs" />
+    <Compile Include="Controllers\StatusMovimientoesController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\assets\demo\chart-area-demo.js" />
@@ -334,11 +336,6 @@
     <Content Include="Views\Equipoes\Details.cshtml" />
     <Content Include="Views\Equipoes\Edit.cshtml" />
     <Content Include="Views\Equipoes\Index.cshtml" />
-    <Content Include="Views\InscripcionAtletas\Create.cshtml" />
-    <Content Include="Views\InscripcionAtletas\Delete.cshtml" />
-    <Content Include="Views\InscripcionAtletas\Details.cshtml" />
-    <Content Include="Views\InscripcionAtletas\Edit.cshtml" />
-    <Content Include="Views\InscripcionAtletas\Index.cshtml" />
     <Content Include="Views\InscripcionEquipoes\Create.cshtml" />
     <Content Include="Views\InscripcionEquipoes\Delete.cshtml" />
     <Content Include="Views\InscripcionEquipoes\Details.cshtml" />
@@ -365,13 +362,22 @@
     <Content Include="Views\Intentoes\Details.cshtml" />
     <Content Include="Views\Intentoes\Edit.cshtml" />
     <Content Include="Views\Intentoes\Index.cshtml" />
+    <Content Include="Views\Competencias\ListaEquipos.cshtml" />
+    <Content Include="Views\Competencias\CompetenciasPublico.cshtml" />
+    <Content Include="Views\Records\RecordsSentadilla.cshtml" />
+    <Content Include="Views\Records\RecordsPressBanca.cshtml" />
+    <Content Include="Views\Records\RecordsPesoMuerto.cshtml" />
     <Content Include="Views\CategoriaPesoes\Create.cshtml" />
     <Content Include="Views\CategoriaPesoes\Delete.cshtml" />
     <Content Include="Views\CategoriaPesoes\Details.cshtml" />
     <Content Include="Views\CategoriaPesoes\Edit.cshtml" />
     <Content Include="Views\CategoriaPesoes\Index.cshtml" />
-    <Content Include="Views\Competencias\ListaEquipos.cshtml" />
-    <Content Include="Views\Competencias\CompetenciasPublico.cshtml" />
+    <Content Include="Views\InscripcionAtletas\Create.cshtml" />
+    <Content Include="Views\InscripcionAtletas\Delete.cshtml" />
+    <Content Include="Views\InscripcionAtletas\Details.cshtml" />
+    <Content Include="Views\InscripcionAtletas\Edit.cshtml" />
+    <Content Include="Views\InscripcionAtletas\Index.cshtml" />
+    <Content Include="Views\Competencias\CompetenciaAdministracion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

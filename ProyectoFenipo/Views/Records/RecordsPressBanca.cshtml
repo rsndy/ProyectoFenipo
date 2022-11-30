@@ -1,0 +1,52 @@
+﻿@using ProyectoFenipo.Models
+
+@{
+    ViewBag.Title = "Records Press Banca";
+    ProyectoFenipoContainer db = new ProyectoFenipoContainer();
+    List<InscripcionAtletas> Atletas = db.InscripcionAtletasSet.ToList();
+}
+
+<h2>Records de Peso Muerto</h2>
+
+<table class="table">
+    @foreach (var cat in db.CategoriaPesos.Where(x => x.Genero == "Masculino").OrderBy(x => x.NombreCategoriaPeso))
+    {
+        <tr>
+            <th>
+                @Html.DisplayName("Categoria" + cat.NombreCategoriaPeso)
+            </th>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayName("Levantador")
+            </th>
+            <th>
+                @Html.DisplayName("Mejor Sentadilla")
+            </th>
+        </tr>
+        foreach (var atleta in db.Atletas)
+        {
+            foreach (var inscrip in db.InscripcionAtletasSet.Where(x => x.AtletaId == atleta.Id).ToList())
+            {
+                if (inscrip.CategoriaPesoId == cat.Id)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayName(atleta.NombreAtleta.ToString())
+                        </td>
+                        <td>
+                            @Html.DisplayName(db.Intentos.Where(x => x.InscripcionAtletasId == inscrip.AtletaId && x.InscripcionAtletas.CategoriaPesoId == cat.Id && x.StatusMovimiento.Status == "Valido" && x.Movimiento1.Nombre == "Press de Banca").Select(x => x.KilosMovimiento).Max().ToString())
+                        </td>
+
+                    </tr>
+
+                }
+            }
+        }
+
+
+
+
+    }
+</table>
+

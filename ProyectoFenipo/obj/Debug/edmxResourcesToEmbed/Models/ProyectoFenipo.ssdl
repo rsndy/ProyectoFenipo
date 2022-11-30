@@ -102,13 +102,16 @@
     <Property Name="CompetenciaId" Type="int" Nullable="false" />
     <Property Name="CategoriaEdadId" Type="int" Nullable="false" />
     <Property Name="CategoriaPesoId" Type="int" Nullable="false" />
+    <Property Name="PesoCorporal" Type="float" Nullable="false" />
+    <Property Name="Total" Type="float" Nullable="false" />
+    <Property Name="GLPoint" Type="float" Nullable="false" />
   </EntityType>
   <EntityType Name="CategoriaPesos">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="NombreCategoriaPeso" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NombreCategoriaPeso" Type="int" Nullable="false" />
     <Property Name="Genero" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="CategoriaEdades">

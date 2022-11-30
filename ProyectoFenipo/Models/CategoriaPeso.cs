@@ -21,7 +21,7 @@ namespace ProyectoFenipo.Models
         }
     
         public int Id { get; set; }
-        public string NombreCategoriaPeso { get; set; }
+        public int NombreCategoriaPeso { get; set; }
         public string Genero { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

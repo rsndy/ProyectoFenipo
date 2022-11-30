@@ -1,89 +1,93 @@
 ﻿@using ProyectoFenipo.Models
-
+@using ProyectoFenipo.Controllers
 @model ProyectoFenipo.Models.Competencia
 
 @{
     ProyectoFenipoContainer db = new ProyectoFenipoContainer();
     ViewBag.Title = "Lista De Atletas";
     List<InscripcionAtletas> Atletas = db.InscripcionAtletasSet.Where(x => x.CompetenciaId == Model.Id).ToList();
-    //double a = new double();
-    //double b = new double();
-    //double c = new double();
-    //double e = 2.718281828459 ;
-    //var glPoint = new double();
-    
+    InscripcionAtletasController control = new InscripcionAtletasController(); 
 
 }
 
 <h2>Clasificacion de Atletas Masculinos</h2>
 
 <table class="table">
-    @foreach (var cat in db.CategoriaPesos.Where(x => x.Genero == "Masculino"))
+    @foreach (var cat in db.CategoriaPesos.Where(x => x.Genero == "Masculino").OrderBy(x => x.NombreCategoriaPeso))
     {
-        <tr>
-            <th>
-                @Html.DisplayName("Categoria" + cat.NombreCategoriaPeso)
-            </th>
-        </tr>
-        <tr>
-            <th>
-                @Html.DisplayName("Levantador")
-            </th>
-            <th>
-                @Html.DisplayName("Mejor Sentadilla")
-            </th>
-            <th>
-                @Html.DisplayName("Mejor Press Banca")
-            </th>
-            <th>
-                @Html.DisplayName("Mejor Deadlift")
-            </th>
-            <th>
-                @Html.DisplayName("Total")
-            </th>
-        </tr>
-        foreach (var atleta in Atletas)
+        if (cat.InscripcionAtletas.Where(x=>x.CompetenciaId == Model.Id).Count() != 0)
         {
-            if (atleta.CategoriaPesoId == cat.Id)
+            <tr>
+                <th>
+                    @Html.DisplayName("Categoria" + cat.NombreCategoriaPeso)
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayName("Levantador")
+                </th>
+                <th>
+                    @Html.DisplayName("Peso Corporal")
+                </th>
+                <th>
+                    @Html.DisplayName("Mejor Sentadilla")
+                </th>
+                <th>
+                    @Html.DisplayName("Mejor Press Banca")
+                </th>
+                <th>
+                    @Html.DisplayName("Mejor Deadlift")
+                </th>
+                <th>
+                    @Html.DisplayName("Total")
+                </th>
+                <th>
+                    @Html.DisplayName("Gl Points")
+                </th>
+            </tr>
+            foreach (var atleta in Atletas)
             {
-                //if (atleta.Atleta.Sexo == "Hombre")
-                //{
-
-                //    a = 1199.72;
-                //    b = 1025.18;
-                //    c = 0.00921;
-                //    double categoria = (-double.Parse(cat.NombreCategoriaPeso));
-                //    glPoint = 100 / a - b * Math.Pow(e, (-c * categoria));
-                //}
+                if (atleta.CategoriaPesoId == cat.Id)
+                {
 
 
-                double mejorSentadilla = (double)db.Intentos.Where(x => x.InscripcionAtletasId == atleta.Id && x.MovimientoId == 1 && x.StatusMovimientoId == 1 || x.StatusMovimientoId == 4).Max(x => x.KilosMovimiento);
-                double mejorBanca = (double)db.Intentos.Where(x => x.InscripcionAtletasId == atleta.Id && x.MovimientoId == 2 && x.StatusMovimientoId == 1 || x.StatusMovimientoId == 4).Max(x => x.KilosMovimiento);
-                double mejorPesoMuerto = (double)db.Intentos.Where(x => x.InscripcionAtletasId == atleta.Id && x.MovimientoId == 3 && x.StatusMovimientoId == 1 || x.StatusMovimientoId == 4).Max(x => x.KilosMovimiento);
+                    double mejorSentadilla = (double)db.Intentos.Where(x => x.InscripcionAtletasId == atleta.Id && x.MovimientoId == 1 && x.StatusMovimientoId == 1 || x.StatusMovimientoId == 4).Max(x => x.KilosMovimiento);
+                    double mejorBanca = (double)db.Intentos.Where(x => x.InscripcionAtletasId == atleta.Id && x.MovimientoId == 2 && x.StatusMovimientoId == 1 || x.StatusMovimientoId == 4).Max(x => x.KilosMovimiento);
+                    double mejorPesoMuerto = (double)db.Intentos.Where(x => x.InscripcionAtletasId == atleta.Id && x.MovimientoId == 3 && x.StatusMovimientoId == 1 || x.StatusMovimientoId == 4).Max(x => x.KilosMovimiento);
+                    atleta.Total = (int)(mejorBanca + mejorPesoMuerto + mejorSentadilla);
 
-                <tr>
-                    <td>
-                        @Html.DisplayName(atleta.Atleta.NombreAtleta.ToString())
-                    </td>
-                    <td>
-                        @Html.DisplayName(mejorSentadilla.ToString())
-                    </td>
-                    <td>
-                        @Html.DisplayName(mejorBanca.ToString())
-                    </td>
-                    <td>
-                        @Html.DisplayName(mejorPesoMuerto.ToString())
-                    </td>
-                    <td>
-                        @Html.DisplayName((mejorSentadilla + mejorBanca + mejorPesoMuerto).ToString())
-                    </td>
-                </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayName(atleta.Atleta.NombreAtleta.ToString())
+                        </td>
+                        <td>
+                            @Html.DisplayName((atleta.PesoCorporal).ToString())
+                        </td>
+                        <td>
+                            @Html.DisplayName(mejorSentadilla.ToString())
+                        </td>
+                        <td>
+                            @Html.DisplayName(mejorBanca.ToString())
+                        </td>
+                        <td>
+                            @Html.DisplayName(mejorPesoMuerto.ToString())
+                        </td>
+                        <td>
+                            @Html.DisplayName((atleta.Total).ToString())
+                        </td>
+                        <td>
+                            @Html.DisplayName((atleta.GLPoint).ToString())
+                        </td>
 
+                    </tr>
+
+                }
             }
+
+
         }
-
-
     }
+
 </table>
 
 <h2>Clasificacion de Atletas Femeninas</h2>
@@ -117,15 +121,7 @@
         {
             if (atleta.CategoriaPesoId == cat.Id)
             {
-                //if (atleta.Atleta.Sexo == "Hombre")
-                //{
-
-                //    a = 1199.72;
-                //    b = 1025.18;
-                //    c = 0.00921;
-                //    double categoria = (-double.Parse(cat.NombreCategoriaPeso));
-                //    glPoint = 100 / a - b * Math.Pow(e, (-c * categoria));
-                //}
+               
 
 
                 double mejorSentadilla = (double)db.Intentos.Where(x => x.InscripcionAtletasId == atleta.Id && x.MovimientoId == 1 && x.StatusMovimientoId == 1 || x.StatusMovimientoId == 4).Max(x => x.KilosMovimiento);

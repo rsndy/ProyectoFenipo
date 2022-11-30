@@ -26,6 +26,9 @@ namespace ProyectoFenipo.Models
         public int CompetenciaId { get; set; }
         public int CategoriaEdadId { get; set; }
         public int CategoriaPesoId { get; set; }
+        public double PesoCorporal { get; set; }
+        public double Total { get; set; }
+        public double GLPoint { get; set; }
     
         public virtual Atleta Atleta { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

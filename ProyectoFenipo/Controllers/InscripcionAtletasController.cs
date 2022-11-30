@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ProyectoFenipo.Models;
+using ProyectoFenipo.Controllers;
 
 namespace ProyectoFenipo.Controllers
 {
@@ -39,12 +40,11 @@ namespace ProyectoFenipo.Controllers
         // GET: InscripcionAtletas/Create
         public ActionResult Create()
         {
-           
             ViewBag.AtletaId = new SelectList(db.Atletas, "Id", "NombreAtleta");
-            ViewBag.InscripcionEquipoId = new SelectList(db.InscripcionEquipos, "Id", "Equipo.NombreEquipo");
+            ViewBag.InscripcionEquipoId = new SelectList(db.InscripcionEquipos, "Id", "DelegadoEquipo");
             ViewBag.CompetenciaId = new SelectList(db.Competencias, "Id", "Nombre");
             ViewBag.CategoriaEdadId = new SelectList(db.CategoriaEdades, "Id", "NombreCategoriaEdad");
-            ViewBag.CategoriaPesoId = new SelectList(db.CategoriaPesos, "Id", "NombreCategoriaPeso");
+            ViewBag.CategoriaPesoId = new SelectList(db.CategoriaPesos, "Id", "Genero");
             return View();
         }
 
@@ -53,43 +53,84 @@ namespace ProyectoFenipo.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,AtletaId,InscripcionEquipoId,CompetenciaId,CategoriaEdadId,CategoriaPesoId")] InscripcionAtletas inscripcionAtletas)
+        public ActionResult Create([Bind(Include = "Id,AtletaId,InscripcionEquipoId,CompetenciaId,CategoriaEdadId,CategoriaPesoId,PesoCorporal,Total,GLPoint")] InscripcionAtletas inscripcionAtletas)
         {
-            IntentoesController metodo = new IntentoesController();
-            Intento intento = new Intento();
+            IntentoesController controler = new IntentoesController();
             if (ModelState.IsValid)
             {
+                
+                Intento intento = new Intento(); 
                 db.InscripcionAtletasSet.Add(inscripcionAtletas);
                 db.SaveChanges();
-                for (int i = 0 ; i < 3; i++)
+                intento.InscripcionAtletasId = inscripcionAtletas.Id;
+                intento.KilosMovimiento = 0; 
+                intento.StatusMovimientoId = db.StatusMovimientoSet.Where(x=>x.Status == "Por Ejecutar").Select(c=>c.Id).FirstOrDefault();
+                for(int i = 0; i < 3; i++)
                 {
-                    for (int j = 0; j < 3; j++)
+                    intento.MovimientoId = db.Movimientos.Where(x => x.Nombre == "Sentadilla").Select(x => x.Id).FirstOrDefault();
+                    if (i == 0)
                     {
-                        intento.InscripcionAtletasId = inscripcionAtletas.Id;
-                        intento.KilosMovimiento = 0;
-                        intento.MovimientoId = i + 1;
-                        intento.StatusMovimientoId = 4;
-                        intento.NumeroIntentoId = j + 1;
-                        metodo.CreateInt(intento);
+                        intento.NumeroIntentoId = db.NumeroIntentos.Where(x => x.Numero == "Primer Intento").Select(x => x.Id).FirstOrDefault();
                     }
+                    if (i == 1)
+                    {
+                        intento.NumeroIntentoId = db.NumeroIntentos.Where(x => x.Numero == "Segundo Intento").Select(x => x.Id).FirstOrDefault();
+                    }
+                    if (i == 2)
+                    {
+                        intento.NumeroIntentoId = db.NumeroIntentos.Where(x => x.Numero == "Tercer Intento").Select(x => x.Id).FirstOrDefault();
+                    }
+                    controler.Create(intento);
                 }
+                for (int i = 0; i < 3; i++)
+                {
+                    intento.MovimientoId = db.Movimientos.Where(x => x.Nombre == "Press de banca").Select(x => x.Id).FirstOrDefault();
+                    if (i == 0)
+                    {
+                        intento.NumeroIntentoId = db.NumeroIntentos.Where(x => x.Numero == "Primer Intento").Select(x => x.Id).FirstOrDefault();
+                    }
+                    if (i == 1)
+                    {
+                        intento.NumeroIntentoId = db.NumeroIntentos.Where(x => x.Numero == "Segundo Intento").Select(x => x.Id).FirstOrDefault();
+                    }
+                    if (i == 2)
+                    {
+                        intento.NumeroIntentoId = db.NumeroIntentos.Where(x => x.Numero == "Tercer Intento").Select(x => x.Id).FirstOrDefault();
+                    }
+                    controler.Create(intento);
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    intento.MovimientoId = db.Movimientos.Where(x => x.Nombre == "Peso Muerto").Select(x => x.Id).FirstOrDefault();
+                    if (i == 0)
+                    {
+                        intento.NumeroIntentoId = db.NumeroIntentos.Where(x => x.Numero == "Primer Intento").Select(x => x.Id).FirstOrDefault();
+                    }
+                    if (i == 1)
+                    {
+                        intento.NumeroIntentoId = db.NumeroIntentos.Where(x => x.Numero == "Segundo Intento").Select(x => x.Id).FirstOrDefault();
+                    }
+                    if (i == 2)
+                    {
+                        intento.NumeroIntentoId = db.NumeroIntentos.Where(x => x.Numero == "Tercer Intento").Select(x => x.Id).FirstOrDefault();
+                    }
+                    controler.Create(intento);
+                }
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             ViewBag.AtletaId = new SelectList(db.Atletas, "Id", "NombreAtleta", inscripcionAtletas.AtletaId);
-            ViewBag.InscripcionEquipoId = new SelectList(db.InscripcionEquipos, "Id", "Equipo.NombreEquipo", inscripcionAtletas.InscripcionEquipoId);
+            ViewBag.InscripcionEquipoId = new SelectList(db.InscripcionEquipos, "Id", "DelegadoEquipo", inscripcionAtletas.InscripcionEquipoId);
             ViewBag.CompetenciaId = new SelectList(db.Competencias, "Id", "Nombre", inscripcionAtletas.CompetenciaId);
             ViewBag.CategoriaEdadId = new SelectList(db.CategoriaEdades, "Id", "NombreCategoriaEdad", inscripcionAtletas.CategoriaEdadId);
-            ViewBag.CategoriaPesoId = new SelectList(db.CategoriaPesos, "Id", "NombreCategoriaPeso", inscripcionAtletas.CategoriaPesoId);
-            
+            ViewBag.CategoriaPesoId = new SelectList(db.CategoriaPesos, "Id", "Genero", inscripcionAtletas.CategoriaPesoId);
             return View(inscripcionAtletas);
         }
 
         // GET: InscripcionAtletas/Edit/5
         public ActionResult Edit(int? id)
         {
-
-           
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -100,10 +141,10 @@ namespace ProyectoFenipo.Controllers
                 return HttpNotFound();
             }
             ViewBag.AtletaId = new SelectList(db.Atletas, "Id", "NombreAtleta", inscripcionAtletas.AtletaId);
-            ViewBag.InscripcionEquipoId = new SelectList(db.InscripcionEquipos, "Id", "Equipo.NombreEquipo", inscripcionAtletas.InscripcionEquipoId);
+            ViewBag.InscripcionEquipoId = new SelectList(db.InscripcionEquipos, "Id", "DelegadoEquipo", inscripcionAtletas.InscripcionEquipoId);
             ViewBag.CompetenciaId = new SelectList(db.Competencias, "Id", "Nombre", inscripcionAtletas.CompetenciaId);
             ViewBag.CategoriaEdadId = new SelectList(db.CategoriaEdades, "Id", "NombreCategoriaEdad", inscripcionAtletas.CategoriaEdadId);
-            ViewBag.CategoriaPesoId = new SelectList(db.CategoriaPesos, "Id", "NombreCategoriaPeso", inscripcionAtletas.CategoriaPesoId);
+            ViewBag.CategoriaPesoId = new SelectList(db.CategoriaPesos, "Id", "Genero", inscripcionAtletas.CategoriaPesoId);
             return View(inscripcionAtletas);
         }
 
@@ -112,7 +153,7 @@ namespace ProyectoFenipo.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,AtletaId,InscripcionEquipoId,CompetenciaId,CategoriaEdadId,CategoriaPesoId")] InscripcionAtletas inscripcionAtletas)
+        public ActionResult Edit([Bind(Include = "Id,AtletaId,InscripcionEquipoId,CompetenciaId,CategoriaEdadId,CategoriaPesoId,PesoCorporal,Total,GLPoint")] InscripcionAtletas inscripcionAtletas)
         {
             if (ModelState.IsValid)
             {
@@ -121,10 +162,10 @@ namespace ProyectoFenipo.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.AtletaId = new SelectList(db.Atletas, "Id", "NombreAtleta", inscripcionAtletas.AtletaId);
-            ViewBag.InscripcionEquipoId = new SelectList(db.InscripcionEquipos, "Id", "Equipo.NombreEquipo", inscripcionAtletas.InscripcionEquipoId);
+            ViewBag.InscripcionEquipoId = new SelectList(db.InscripcionEquipos, "Id", "DelegadoEquipo", inscripcionAtletas.InscripcionEquipoId);
             ViewBag.CompetenciaId = new SelectList(db.Competencias, "Id", "Nombre", inscripcionAtletas.CompetenciaId);
             ViewBag.CategoriaEdadId = new SelectList(db.CategoriaEdades, "Id", "NombreCategoriaEdad", inscripcionAtletas.CategoriaEdadId);
-            ViewBag.CategoriaPesoId = new SelectList(db.CategoriaPesos, "Id", "NombreCategoriaPeso", inscripcionAtletas.CategoriaPesoId);
+            ViewBag.CategoriaPesoId = new SelectList(db.CategoriaPesos, "Id", "Genero", inscripcionAtletas.CategoriaPesoId);
             return View(inscripcionAtletas);
         }
 
