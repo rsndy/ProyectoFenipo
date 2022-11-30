@@ -377,6 +377,7 @@
     <Content Include="Views\InscripcionAtletas\Edit.cshtml" />
     <Content Include="Views\InscripcionAtletas\Index.cshtml" />
     <Content Include="Views\Competencias\ListaAtletas.cshtml" />
+    <Content Include="Views\Account\LoginUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
