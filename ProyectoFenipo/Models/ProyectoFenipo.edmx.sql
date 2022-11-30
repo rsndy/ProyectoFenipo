@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/29/2022 18:14:02
+-- Date Created: 11/29/2022 19:10:33
 -- Generated from EDMX file: C:\Users\Uriel Sandi G\Desktop\ProyectoFenipo\ProyectoFenipo\Models\ProyectoFenipo.edmx
 -- --------------------------------------------------
 
